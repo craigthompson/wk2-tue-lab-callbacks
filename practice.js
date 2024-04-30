@@ -28,14 +28,16 @@
   Return the result of invoking the callback.
 */
 
-// Code Here
+function first(arr, func) {
+  return func(arr[0]);
+}
 
 // Do not edit the code below.
-const names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+const names = ["Tyler", "Cahlan", "Ryan", "Colt", "Tyler", "Blaine", "Cahlan"];
 
 // Your function is called here
 first(names, function (firstName) {
-  console.log('The first name in names is ' + firstName);
+  console.log("The first name in names is " + firstName);
   return firstName;
 });
 // Do not edit the code above.
@@ -48,12 +50,15 @@ first(names, function (firstName) {
   Return the result of invoking the callback.
 */
 
-//Code Here
+function last(arr, func) {
+  // return func(arr[arr.length - 1]);
+  return func(arr.at(-1));
+}
 
 // Do not edit the code below.
 // Your function is called here
 last(names, (lastName) => {
-  console.log('The last name in names is ' + lastName);
+  console.log("The last name in names is " + lastName);
   return lastName;
 });
 // Do not edit the code above.
@@ -65,12 +70,14 @@ last(names, (lastName) => {
   Invoke the callback, passing in the product of the two numbers multiplied as the argument.
 */
 
-//Code Here
+function multiply(num1, num2, func) {
+  return func(num1 * num2);
+}
 
 // Do not edit the code below.
 // Your function is called here
 multiply(4, 3, function (answer) {
-  console.log('The answer is ' + answer); //should console.log 12
+  console.log("The answer is " + answer); //should console.log 12
 });
 // Do not edit the code above.
 
@@ -83,15 +90,16 @@ multiply(4, 3, function (answer) {
   If the name does not exist, invoke the callback with false as the argument.
 */
 
-//Code Here
+// const contains = (arr, nameStr, func) => arr.includes(nameStr) ? func(true) : func(false);
+const contains = (arr, nameStr, func) => func(arr.includes(nameStr));
 
 // Do not edit the code below.
 // Your function is called here
-contains(names, 'Colt', (result) => {
+contains(names, "Colt", (result) => {
   if (result === true) {
-    console.log('Colt is in the array');
+    console.log("Colt is in the array");
   } else {
-    console.log('Colt is not in the array');
+    console.log("Colt is not in the array");
   }
 });
 // Do not edit the code above.
@@ -103,12 +111,14 @@ contains(names, 'Colt', (result) => {
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
 
-//Code Here
+const each = (arr, func) => {
+  arr.forEach((item, index) => func(item, index));
+};
 
 // Do not edit the code below.
 // Your function is called here
 each(names, (item, index) => {
-  console.log('The item in the ' + index + ' position is ' + item);
+  console.log("The item in the " + index + " position is " + item);
 });
 // Do not edit the code above.
 
@@ -120,39 +130,50 @@ each(names, (item, index) => {
   When the correct user object is found, invoke the callback with the user object as an argument.
 */
 
-// Code here
+const getUserById = (usersArr, id, func) => {
+  return usersArr.forEach((user, index) =>
+    user.id === id ? func(user) : null
+  );
+  // usersArr.forEach((user, index) => {
+  //   if (user.id === id) {
+  //     return func(user);
+  //   } else {
+  //     return;
+  //   }
+  // });
+};
 
 // Do not edit the code below.
 const users = [
   {
-    id: '12d',
-    email: 'tyler@gmail.com',
-    name: 'Tyler',
-    address: '167 East 500 North',
+    id: "12d",
+    email: "tyler@gmail.com",
+    name: "Tyler",
+    address: "167 East 500 North",
   },
   {
-    id: '15a',
-    email: 'cahlan@gmail.com',
-    name: 'Cahlan',
-    address: '135 East 320 North',
+    id: "15a",
+    email: "cahlan@gmail.com",
+    name: "Cahlan",
+    address: "135 East 320 North",
   },
   {
-    id: '16t',
-    email: 'ryan@gmail.com',
-    name: 'Ryan',
-    address: '192 East 32 North',
+    id: "16t",
+    email: "ryan@gmail.com",
+    name: "Ryan",
+    address: "192 East 32 North",
   },
 ];
 
 // Your function is called here
-getUserById(users, '16t', (user) => {
+getUserById(users, "16t", (user) => {
   console.log(
-    'The user with the id 16t has the email of ' +
+    "The user with the id 16t has the email of " +
       user.email +
-      ' the name of ' +
+      " the name of " +
       user.name +
-      ' and the address of ' +
-      user.address,
+      " and the address of " +
+      user.address
   );
 });
 // Do not edit the code above.
@@ -170,7 +191,10 @@ getUserById(users, '16t', (user) => {
 // Make sure to use an arrow function.
 // You should not use a for loop, but should use the filter method instead.
 
-// REPLACE THIS WITH YOUR CODE
+// function evens(arrNums) {
+//   return arrNums.filter((num) => num % 2 === 0);
+// }
+const evens = (arrNums) => arrNums.filter((num) => num % 2 === 0);
 
 /// /////// PROBLEM 8 //////////
 
@@ -182,7 +206,11 @@ getUserById(users, '16t', (user) => {
 //
 // Make sure to use an arrow function combined with the filter method (not a for loop).
 
-// REPLACE THIS WITH YOUR CODE
+// function startWithLetterA(arrWords) {
+//   return arrWords.filter((word) => word[0].toUpperCase() === "A");
+// }
+const startWithLetterA = (arrWords) =>
+  arrWords.filter((word) => word[0].toUpperCase() === "A");
 
 /// /////// PROBLEM 9 //////////
 
@@ -192,7 +220,10 @@ getUserById(users, '16t', (user) => {
 //
 // Make sure to use arrow functions combined with the map method.
 
-// REPLACE THIS WITH YOUR CODE
+// function formalGreeting(arrNames) {
+//   return arrNames.map((name) => `Hello, ${name}`);
+// }
+const formalGreeting = (arrNames) => arrNames.map((name) => `Hello, ${name}`);
 
 /// /////// PROBLEM 10 //////////
 
@@ -202,7 +233,10 @@ getUserById(users, '16t', (user) => {
 // Remember that by default, JavaScript sorts by converting all items to strings. So you
 // will need to provide a compare function.
 
-// REPLACE THIS WITH YOUR CODE
+// function sortNumbers(arrNums) {
+//   return arrNums.sort((a, b) => a - b);
+// }
+const sortNumbers = (arrNums) => arrNums.sort((a, b) => a - b);
 
 /// /////// PROBLEM 11 //////////
 
@@ -216,13 +250,18 @@ getUserById(users, '16t', (user) => {
 
 // Do not edit the code below.
 const employees = [
-  { name: 'James', job: 'receptionist' },
-  { name: 'Steve', job: 'programmer' },
-  { name: 'Alicia', job: 'designer' },
+  { name: "James", job: "receptionist" },
+  { name: "Steve", job: "programmer" },
+  { name: "Alicia", job: "designer" },
 ];
 // Do not edit the code above.
 
-// REPLACE THIS WITH YOUR CODE
+// const findProgrammer = (arrEmployees) =>
+//   arrEmployees.filter((employee) => employee.job === "programmer")[0];
+const isProgrammer = (employee) => employee.job === "programmer";
+function findProgrammer(arrEmployees) {
+  return arrEmployees.filter(isProgrammer)[0];
+}
 
 ////////// PROBLEM 12 //////////
 
@@ -249,23 +288,28 @@ const orders = [
   Example: if tax is 0.07, the price afterTax could be calculated like this: afterTax = price * 1.07)
 */
 
-let orderTotals; // Code here
+const calcTotal = (order) => order.price * (1 + order.tax);
+let orderTotals = orders.map(calcTotal);
 
 /// /////// PROBLEM 13 //////////
 
 // Do not edit code below.
 const exampleMenuItems = [
-  { item: 'Caesar salad', price: 6 },
-  { item: 'Sirloin steak', price: 24 },
-  { item: 'Bottle of fine wine', price: 104 },
-  { item: 'Pasta primavera', price: 17 },
+  { item: "Caesar salad", price: 6 },
+  { item: "Sirloin steak", price: 24 },
+  { item: "Bottle of fine wine", price: 104 },
+  { item: "Pasta primavera", price: 17 },
 ];
 // Do not edit code above.
 
 // Create a function called sortMenuItems which takes in an array of objects like the one above
 // and sorts the array by price from smallest to largest. It should return the sorted array.
 
-// REPLACE THIS WITH YOUR CODE
+const comparePrice = (a, b) => a.price - b.price;
+function sortMenuItems(arrObjs) {
+  return arrObjs.sort(comparePrice);
+}
+sortMenuItems(exampleMenuItems);
 
 /// /////// PROBLEM 14 //////////
 
@@ -275,4 +319,8 @@ const exampleMenuItems = [
 //
 // Make sure to use arrow functions combined with the reduce method.
 
-// REPLACE THIS WITH YOUR CODE
+const calcProd = (accumulator, current) => accumulator * current;
+
+const productOfArray = (arrNums) => {
+  return arrNums.reduce(calcProd);
+};
